@@ -5,6 +5,7 @@
   "description": "Static official website for Spud OpenAI.",
   "scripts": {
     "generate:brand": "node scripts/generate_brand_assets.js",
+    "sync:acme": "node scripts/sync_acme_challenge_files.js",
     "start": "node server.js",
     "test": "playwright test",
     "test:browser": "playwright test"
@@ -13,4 +14,3 @@
     "@playwright/test": "^1.54.2"
   }
 }
-
