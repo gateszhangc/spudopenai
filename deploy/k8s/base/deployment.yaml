@@ -17,6 +17,8 @@ spec:
         app.kubernetes.io/name: spudopenai
         app.kubernetes.io/part-of: spudopenai
     spec:
+      imagePullSecrets:
+        - name: registry-creds
       affinity:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
