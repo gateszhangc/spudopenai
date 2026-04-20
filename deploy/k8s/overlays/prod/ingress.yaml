@@ -3,9 +3,7 @@ kind: Ingress
 metadata:
   name: spudopenai
   annotations:
-    acme.cert-manager.io/http01-edit-in-place: "true"
     cert-manager.io/cluster-issuer: letsencrypt-prod
-    cert-manager.io/issue-temporary-certificate: "true"
     nginx.ingress.kubernetes.io/ssl-redirect: "false"
     nginx.ingress.kubernetes.io/use-port-in-redirects: "false"
 spec:
