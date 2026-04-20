@@ -41,6 +41,26 @@ test.describe("Spud OpenAI official site", () => {
     const sitemap = await request.get("/sitemap.xml");
     expect(sitemap.ok()).toBe(true);
     expect(await sitemap.text()).toContain("<loc>https://spudopenai.lol/</loc>");
+
+    const wwwRedirect = await request.get("/pricing?from=www", {
+      headers: {
+        host: "www.spudopenai.lol",
+        "x-forwarded-proto": "https"
+      },
+      maxRedirects: 0
+    });
+    expect(wwwRedirect.status()).toBe(308);
+    expect(wwwRedirect.headers().location).toBe("https://spudopenai.lol/pricing?from=www");
+
+    const httpRedirect = await request.get("/faq?from=http", {
+      headers: {
+        host: "spudopenai.lol",
+        "x-forwarded-proto": "http"
+      },
+      maxRedirects: 0
+    });
+    expect(httpRedirect.status()).toBe(308);
+    expect(httpRedirect.headers().location).toBe("https://spudopenai.lol/faq?from=http");
   });
 
   test("mobile homepage stays within viewport and keeps faq usable", async ({ browser }) => {

@@ -64,6 +64,20 @@ const serveFile = (requestPath, response) => {
 const server = http.createServer((request, response) => {
   const url = new URL(request.url || "/", `http://${request.headers.host || "localhost"}`);
   let pathname = decodeURIComponent(url.pathname);
+  const forwardedHost = (request.headers["x-forwarded-host"] || request.headers.host || "").split(",")[0].trim();
+  const hostname = forwardedHost.split(":")[0].toLowerCase();
+  const forwardedProto = (request.headers["x-forwarded-proto"] || "").split(",")[0].trim().toLowerCase();
+  const isAcmeChallenge = pathname.startsWith("/.well-known/acme-challenge/");
+
+  if (!isAcmeChallenge && hostname === "www.spudopenai.lol") {
+    send(response, 308, { Location: `https://spudopenai.lol${pathname}${url.search}` }, "");
+    return;
+  }
+
+  if (!isAcmeChallenge && hostname === "spudopenai.lol" && forwardedProto === "http") {
+    send(response, 308, { Location: `https://spudopenai.lol${pathname}${url.search}` }, "");
+    return;
+  }
 
   if (pathname === "/healthz") {
     send(response, 200, { "Content-Type": "application/json; charset=utf-8" }, JSON.stringify({ ok: true }));
@@ -80,4 +94,3 @@ const server = http.createServer((request, response) => {
 server.listen(port, host, () => {
   console.log(`Static site listening on http://${host}:${port}`);
 });
-
