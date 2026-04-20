@@ -1,9 +1,10 @@
 {
-  "name": "artemis-2-wallpaper",
+  "name": "spudopenai",
   "version": "1.0.0",
   "private": true,
-  "description": "Static Artemis II wallpaper site built from publicly released NASA imagery.",
+  "description": "Static official website for Spud OpenAI.",
   "scripts": {
+    "generate:brand": "node scripts/generate_brand_assets.js",
     "start": "node server.js",
     "test": "playwright test",
     "test:browser": "playwright test"
@@ -12,3 +13,4 @@
     "@playwright/test": "^1.54.2"
   }
 }
+

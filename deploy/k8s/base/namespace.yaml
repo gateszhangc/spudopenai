@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: spudopenai
+  labels:
+    app.kubernetes.io/name: spudopenai
+    app.kubernetes.io/part-of: spudopenai

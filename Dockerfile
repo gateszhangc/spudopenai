@@ -7,7 +7,9 @@ ENV PORT=3000
 ENV HOSTNAME=0.0.0.0
 
 COPY assets ./assets
+COPY brand ./brand
 COPY index.html ./index.html
+COPY package.json ./package.json
 COPY robots.txt ./robots.txt
 COPY script.js ./script.js
 COPY server.js ./server.js
