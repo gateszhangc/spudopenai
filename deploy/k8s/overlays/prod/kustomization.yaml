@@ -5,4 +5,4 @@ resources:
   - ingress.yaml
 images:
   - name: registry.144.91.77.245.sslip.io/spudopenai
-    newTag: 130380a09745674c55098a9ef5725b9f4bff8141
+    newTag: 75ce5e27da1be36869ac963069b57e7b96687e1b
